@@ -106,14 +106,17 @@ Q(t+1)=T′Q(t)+TQ(t)′
 ⇒Q(t+1)=T⊕Q(t)
 
 ### Procedure:
-```
 Step 1: Open Quartus II and select new project and choose the file location.
+<br>
 Step 2: Module Declaration. Module should have the file name.
+<br>
 Step 3: Input-Output Delecaration.
+<br>
 Step 4: Use assign declaration and wire to define the functionality of logic circuits.
+<br>
 Step 5: At the end give endmodule.
+<br>
 Step 6: Run the program and choose RTL viewer to get RTL realization.
-```
 
 ### PROGRAM 
 # SR FLIP FLOP:
