@@ -119,58 +119,60 @@ Step 5: At the end give endmodule.
 Step 6: Run the program and choose RTL viewer to get RTL realization.
 
 ### PROGRAM 
-# SR FLIP FLOP:
+# SR flip flop:
 ```
-module flop(S,R,clk,Q,Qbar);
+module srflipflop(S,R,clk,Q,Qbar);
 input S,R,clk;
 output reg Q;
 output reg Qbar;
 initial Q=0;
 initial Qbar=1;
-always @(posedge clk)
+always @ (posedge clk)
 begin
 Q=S|((~R)&Q);
 Qbar=R|((~S)&(Qbar));
 end
 endmodule
 ```
-# JK FLIP FLOP:
+# D flipflop:
 ```
-module jk(q,qbar,k,j,clk);
-input j,k,clk;
+module Dflipflop(d,clk,q,qbar);
+input d,clk;
 output q,qbar;
-wire nand1_out;
-wire nand2_out;
-nand(nand1_out,j,clk,qbar);
-nand(nand2_out,k,clk,q);
-nand(q,nand1_out,qbar,qbar);
-nand(qbar,nand2_out,q);
+reg q,qbar;
+always @(posedge clk)
+begin
+q<=d;
+qbar<=~q;
+end
 endmodule
 ```
-# T FLIP FLOP:
+# JK flipflop:
 ```
-module tff(t,qbar,q,clk);
-input t,clk;
-output q,qbar;
-wire n1,n2;
-nand(n1,t,clk,qbar);
-nand(n2,clk,t,q);
-nand(q,n1,qbar);
-nand(qbar,n2,q);
+module jkflipflop(J,K,clk,Q,Qbar);
+input J,K,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
+always @(posedge clk)
+begin
+Q=(J&(~Q))|((~K)&Q);
+Qbar=((~J)&(Qbar))|K&(~Qbar);
+end
 endmodule
 ```
-# D FLIP FLOP:
+# T flipflop:
 ```
-module d(q,qbar,d1,clk);
-input d1,clk;
+module Tflipflop(clk,T,q,qbar);
+input clk,T;
 output q,qbar;
-wire n1;
-wire n2;
-not(x,d1);
-nand(n1,clk,d1);
-nand(n2,clk,x);
-nand(q,n2,qbar);
-nand(qbar,n1,q);
+reg q,qbar;
+always @(posedge clk)
+begin
+q<=(T&~q)|(~T&q);
+qbar<=~q;
+end
 endmodule
 ```
 ### RTL LOGIC FOR FLIPFLOPS 
